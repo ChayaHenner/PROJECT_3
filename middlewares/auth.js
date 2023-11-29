@@ -4,7 +4,7 @@ const {config} = require("../config/secret")
 exports.auth = (req,res,next) => {
   let token = req.header("x-api-key");
   if(!token){
-    return res.status(401).json({msg:"You need to send token to this endpoint url 555"})
+    return res.status(401).json({msg:"To view this data please enter valid token."})
   }
   try{
     let decodeToken = jwt.verify(token,config.tokenSecret);
@@ -14,7 +14,7 @@ exports.auth = (req,res,next) => {
   }
   catch(err){
     console.log(err);
-    return res.status(401).json({msg:"Token invalid or expired, log in again or you hacker!"})
+    return res.status(401).json({msg:"The you entered is invalid or expired."})
   }
 }
 exports.authAdmin = (req,res,next) => {
@@ -25,7 +25,7 @@ exports.authAdmin = (req,res,next) => {
   try{
     let decodeToken = jwt.verify(token,config.tokenSecret);
     if(decodeToken.role != "admin"){
-      return res.status(401).json({msg:"Token invalid or expired, code: 6A"})
+      return res.status(401).json({msg:"Token invalid or you are not admin"})
     }
     req.tokenData = decodeToken;
 
