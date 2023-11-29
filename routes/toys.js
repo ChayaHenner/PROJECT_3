@@ -1,7 +1,7 @@
-const express= require("express");
+const express = require("express");
 const router = express.Router();
-const {auth, authAdmin} = require("../middlewares/auth");
-const {ToyModel,validateToy} = require("../models/toyModel")
+const { auth, authAdmin } = require("../middlewares/auth");
+const { ToyModel, validateToy } = require("../models/toyModel")
 const bcrypt = require("bcrypt");
 
 
@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
       .find({})
       .limit(perPage)
       .skip((page - 1) * perPage)
-      // .sort({ [sort]: reverse })
+    // .sort({ [sort]: reverse })
     res.json(data);
   }
   catch (err) {
@@ -36,10 +36,31 @@ router.get("/prices", async (req, res) => {
 
   try {
     let data = await ToyModel
-      .find({})
+      .find({ price: { $gte: min, $lte: max } })
       .limit(perPage)
       .skip((page - 1) * perPage)
-      data=data.filter(item => item.price >= min && item.price <= max);
+    // data = data.filter(item => item.price >= min && item.price <= max);
+
+    res.json(data);
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).json({ msg: "err", err })
+  }
+
+})
+router.get("/category/:cat", async (req, res) => {
+  let cat = req.params.cat
+  cat = new RegExp(cat,"i")
+
+  let perPage = 10
+  let page = req.query.page || 1;
+
+  try {
+    let data = await ToyModel
+      .find({ category: cat })
+      .limit(perPage)
+      .skip((page - 1) * perPage)
 
     res.json(data);
   }
@@ -50,38 +71,38 @@ router.get("/prices", async (req, res) => {
 
 })
 
-router.get("/search" , async(req,res)=> {
+router.get("/search", async (req, res) => {
   let perPage = req.query.perPage || 10;
   let page = req.query.page || 1;
-    try{
-      let queryS = req.query.s;
-      let searchReg = new RegExp(queryS,"i")
-      let data = await ToyModel.find({$or:[{name:searchReg},{info:searchReg}]})
+  try {
+    let queryS = req.query.s;
+    let searchReg = new RegExp(queryS, "i")
+    let data = await ToyModel.find({ $or: [{ name: searchReg }, { info: searchReg }] })
       .limit(perPage)
       .skip((page - 1) * perPage)
-      .sort({_id:-1})
-      res.json(data);
-    }
-    catch(err){
-      console.log(err);
-      res.status(500).json({msg:"server error .cant complete your search",err})
-    }
+      .sort({ _id: -1 })
+    res.json(data);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "server error .cant complete your search", err })
+  }
 })
 
-router.post("/", auth, async(req,res) => {
+router.post("/", auth, async (req, res) => {
   let validBody = validateToy(req.body);
-  if(validBody.error){
+  if (validBody.error) {
     return res.status(400).json(validBody.error.details);
   }
-  try{
+  try {
     let toy = new ToyModel(req.body);
     toy.user_id = req.tokenData._id
     await toy.save();
     res.status(201).json(toy);
   }
-  catch(err){
+  catch (err) {
     console.log(err);
-    res.status(500).json({msg:"server error. was valid but did not create toy",err})
+    res.status(500).json({ msg: "server error. was valid but did not create toy", err })
   }
 })
 
