@@ -6,9 +6,50 @@ const bcrypt = require("bcrypt");
 
 
 
-router.get("/" , (req,res)=> {
-  res.json({msg:"Rest api work !"})
+router.get("/", async (req, res) => {
+  let perPage = 10// Math.min(req.query.perPage, 20) || 4;
+  let page = req.query.page || 1;
+  let max = req.query.max || 1000000;
+  let min = req.query.min || 1;
+  // let sort = req.query.sort || "_id";
+  // let reverse = req.query.reverse == "yes" ? -1 : 1;
+
+  try {
+    let data = await ToyModel
+      .find({})
+      .limit(perPage)
+      .skip((page - 1) * perPage)
+      // .sort({ [sort]: reverse })
+    res.json(data);
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).json({ msg: "err", err })
+  }
+
 })
+router.get("/prices", async (req, res) => {
+  let perPage = 10
+  let page = req.query.page || 1;
+  let max = req.query.max || 1000000;
+  let min = req.query.min || 1;
+
+  try {
+    let data = await ToyModel
+      .find({})
+      .limit(perPage)
+      .skip((page - 1) * perPage)
+      data=data.filter(item => item.price >= min && item.price <= max);
+
+    res.json(data);
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).json({ msg: "err", err })
+  }
+
+})
+
 router.get("/search" , async(req,res)=> {
   let perPage = req.query.perPage || 10;
   let page = req.query.page || 1;
@@ -27,15 +68,16 @@ router.get("/search" , async(req,res)=> {
     }
 })
 
-router.post("/", async(req,res) => {
+router.post("/", auth, async(req,res) => {
   let validBody = validateToy(req.body);
   if(validBody.error){
     return res.status(400).json(validBody.error.details);
   }
   try{
-    let user = new ToyModel(req.body);
-    await user.save();
-    res.status(201).json(user);
+    let toy = new ToyModel(req.body);
+    toy.user_id = req.tokenData._id
+    await toy.save();
+    res.status(201).json(toy);
   }
   catch(err){
     console.log(err);

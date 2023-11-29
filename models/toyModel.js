@@ -9,7 +9,9 @@ const toysSchema = new mongoose.Schema({
     user_id: String,
     date_created: {
         type: Date, default: Date.now()
-    }
+    },
+    user_id:String
+
 })
 
 
