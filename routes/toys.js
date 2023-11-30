@@ -106,4 +106,47 @@ router.post("/", auth, async (req, res) => {
   }
 })
 
+router.delete("/:delId", auth, async (req, res) => {
+  try {
+    let delId = req.params.delId;
+    let data;
+    if (req.tokenData.role == "admin") {
+      data = await ToyModel.deleteOne({ _id: delId })
+    }
+    else {
+      data = await ToyModel.deleteOne({ _id: delId, user_id: req.tokenData._id })
+    }
+    if (data.deletedCount == 0)
+      res.json({ msg: "not valid id or you are not allowed to erase. nothing was erased" })
+    else res.json(data);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "wasnt able to delete", err })
+  }
+})
+
+// router.put("/:editId",auth, async(req,res) => {
+//   let validBody = validUser(req.body);
+//   if(validBody.error){
+//     return res.status(400).json(validBody.error.details);
+//   }
+//   try{
+//     let editId = req.params.editId;
+//     let data;
+//     if(req.tokenData.role == "admin"){
+//       data = await UserModel.updateOne({_id:editId},req.body)
+//     }
+//     else{
+//        data = await UserModel.updateOne({_id:editId,user_id:req.tokenData._id},req.body)
+//     }
+//     res.json(data);
+//   }
+//   catch(err){
+//     console.log(err);
+//     res.status(500).json({msg:"server error",err})
+//   }
+// })
+
+
 module.exports = router;
