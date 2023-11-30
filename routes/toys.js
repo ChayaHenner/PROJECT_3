@@ -49,6 +49,19 @@ router.get("/prices", async (req, res) => {
   }
 
 })
+router.get("/single/:id", async (req, res) => {
+  let id = req.params.id
+  try {
+    let data = await ToyModel
+      .find({ _id:id })
+    res.json(data);
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).json({ msg: "err", err })
+  }
+
+})
 router.get("/category/:cat", async (req, res) => {
   let cat = req.params.cat
   cat = new RegExp(cat,"i")
@@ -126,27 +139,22 @@ router.delete("/:delId", auth, async (req, res) => {
   }
 })
 
-// router.put("/:editId",auth, async(req,res) => {
-//   let validBody = validUser(req.body);
-//   if(validBody.error){
-//     return res.status(400).json(validBody.error.details);
-//   }
-//   try{
-//     let editId = req.params.editId;
-//     let data;
-//     if(req.tokenData.role == "admin"){
-//       data = await UserModel.updateOne({_id:editId},req.body)
-//     }
-//     else{
-//        data = await UserModel.updateOne({_id:editId,user_id:req.tokenData._id},req.body)
-//     }
-//     res.json(data);
-//   }
-//   catch(err){
-//     console.log(err);
-//     res.status(500).json({msg:"server error",err})
-//   }
-// })
+router.put("/:editId",auth, async(req,res) => {
+  let validBody = validateToy(req.body);
+  if(validBody.error){
+    return res.status(400).json(validBody.error.details);
+  }
+  try{
+    let editId = req.params.editId;
+    let data;
+       data = await ToyModel.updateOne({_id:editId,user_id:req.tokenData._id},req.body)
+    res.json(data);
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json({msg:"server error",err})
+  }
+})
 
 
 module.exports = router;

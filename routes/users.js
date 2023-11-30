@@ -4,7 +4,6 @@ const { auth, authAdmin } = require("../middlewares/auth");
 const { UserModel, validUser, validLogin, createToken } = require("../models/userModel")
 const bcrypt = require("bcrypt");
 
-// const { getUser } = require("../functions/userFunctions");
 
 router.get("/", async (req, res) => {
   res.json({ msg: "Users work" })
