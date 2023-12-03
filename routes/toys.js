@@ -11,15 +11,12 @@ router.get("/", async (req, res) => {
   let page = req.query.page || 1;
   let max = req.query.max || 1000000;
   let min = req.query.min || 1;
-  // let sort = req.query.sort || "_id";
-  // let reverse = req.query.reverse == "yes" ? -1 : 1;
 
   try {
     let data = await ToyModel
       .find({})
       .limit(perPage)
       .skip((page - 1) * perPage)
-    // .sort({ [sort]: reverse })
     res.json(data);
   }
   catch (err) {
@@ -39,7 +36,6 @@ router.get("/prices", async (req, res) => {
       .find({ price: { $gte: min, $lte: max } })
       .limit(perPage)
       .skip((page - 1) * perPage)
-    // data = data.filter(item => item.price >= min && item.price <= max);
 
     res.json(data);
   }
@@ -148,7 +144,9 @@ router.put("/:editId",auth, async(req,res) => {
     let editId = req.params.editId;
     let data;
        data = await ToyModel.updateOne({_id:editId,user_id:req.tokenData._id},req.body)
-    res.json(data);
+       if (data.modifiedCount == 0)
+       res.json({ msg: "not valid id or you are not allowed to erase. nothing was erased" })
+     else res.json(data);
   }
   catch(err){
     console.log(err);
