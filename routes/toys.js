@@ -30,11 +30,8 @@ router.get("/", async (req, res) => {
 router.get("/toysByUser", auth , async (req, res) => {
   let perPage = 10// Math.min(req.query.perPage, 20) || 4;
   let page = req.query.page || 1;
-  // let userId = req.params.userId
   try {
     let toys = await UserModel.findOne({_id:req.tokenData._id}).populate('toys')
-      // .limit(perPage)
-      // .skip((page - 1) * perPage)
     res.json(toys);
   }
   catch (err) {
