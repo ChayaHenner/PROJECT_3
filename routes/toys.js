@@ -30,7 +30,7 @@ router.get("/", async (req, res) => {
 router.get("/toysByUser/:id", async (req, res) => {
   let perPage = 10// Math.min(req.query.perPage, 20) || 4;
   let page = req.query.page || 1;
-  let id = req.query.id
+  let id = req.params.id
   try {
     let toys = await UserModel.findOne({ _id: req.tokenData._id }).populate('toys')
     res.json(toys);
