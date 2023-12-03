@@ -32,7 +32,7 @@ router.get("/toysByUser/:id", async (req, res) => {
   let page = req.query.page || 1;
   let id = req.params.id
   try {
-    let toys = await UserModel.findOne({ _id: req.tokenData._id }).populate('toys')
+    let toys = await UserModel.findOne({ _id: id }).populate('toys')
     res.json(toys);
   }
   catch (err) {
