@@ -145,7 +145,7 @@ router.put("/:editId",auth, async(req,res) => {
     let data;
        data = await ToyModel.updateOne({_id:editId,user_id:req.tokenData._id},req.body)
        if (data.modifiedCount == 0)
-       res.json({ msg: "not valid id or you are not allowed to erase. nothing was erased" })
+       res.json({ msg: "not valid id or you are not allowed to edit. wasn't edited" })
      else res.json(data);
   }
   catch(err){
