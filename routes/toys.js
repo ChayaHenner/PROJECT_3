@@ -27,11 +27,15 @@ router.get("/", async (req, res) => {
 
 })
 
+
 router.get("/toysByUser/:id", async (req, res) => {
   let id = req.params.id
   try {
-    let toys = await UserModel.findOne({ _id: id }).populate('toys')
-    res.json(toys);
+    let user = await UserModel.findOne({ _id: id }).populate('toys')
+    res.json(user);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
   }
   catch (err) {
     console.log(err)
