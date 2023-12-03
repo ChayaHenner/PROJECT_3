@@ -32,16 +32,16 @@ router.get("/list", async (req, res) => {
   }
 })
 
-// router.get("/usersList", authAdmin, async (req, res) => {
-//   try {
-//     let data = await UserModel.find({}, { password: 0 });
-//     res.json(data)
-//   }
-//   catch (err) {
-//     console.log(err)
-//     res.status(500).json({ msg: "err", err })
-//   }
-// })
+router.get("/usersList", authAdmin, async (req, res) => {
+  try {
+    let data = await UserModel.find({}, { password: 0 });
+    res.json(data)
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).json({ msg: "err", err })
+  }
+})
 
 // router.get("/myInfo", auth, async (req, res) => {
 //   try {
