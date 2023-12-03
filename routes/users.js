@@ -120,6 +120,8 @@ router.delete("/:delId", auth, async (req, res) => {
   }
 })
 
+
+
 router.put("/:editId",auth, async(req,res) => {
   let validBody = validUser(req.body);
   if(validBody.error){
