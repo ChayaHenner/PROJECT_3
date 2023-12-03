@@ -12,8 +12,12 @@ const toysSchema = new mongoose.Schema({
     date_created: {
         type: Date, default: Date.now()
     },
-    user_id:String
-
+    // user_id:String
+    user_id: {
+        type: mongoose.Schema.ObjectId,
+        ref: "users",
+        required: true,
+      }
 })
 
 

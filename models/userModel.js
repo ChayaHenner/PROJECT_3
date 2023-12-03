@@ -14,7 +14,8 @@ let userSchema = new mongoose.Schema({
   role: {
     type: String,
     default: "user"
-  }
+  },
+  toys:[]
 })
 
 exports.UserModel = mongoose.model("users", userSchema);
