@@ -70,13 +70,13 @@
                 </thead>
                 <tbody>
                     <tr style="background-color: salmon;">
-                        <td >GET</td>
+                        <td>GET</td>
                         <td><a href="/users/myInfo">/users/myInfo</a></td>
                         <td class="text-center">none</td>
                         <td>Get your own info - by token.</td>
                     </tr>
                     <tr style="background-color: salmon;">
-                        <td >GET</td>
+                        <td>GET</td>
                         <td><a href="/users/usersList">/users/usersList</a></td>
                         <td class="text-center">none</td>
                         <td>Get list of all users - by token admin.</td>
@@ -88,11 +88,11 @@
                             <pre>
 { 
 fullName: {
-firstName: Maor,
-lastName: Gabay
+firstName: Chaya,
+lastName: Henner
 },
-"email": "MaorGabay@gabay.com",
-"password": "Maor31kd3Fg8"
+"email": "chayahenner@gabay.com",
+"password": "chaya1234"
 } </pre>
                         </td>
                         <td>Add a new user to the data base ,<a class="text-decoration-none"
@@ -100,14 +100,14 @@ lastName: Gabay
                                 you want to see the template of valid user.</a></td>
                     </tr>
                     <tr style="background-color: salmon;">
-                        <td >POST (login)</td>
+                        <td>POST (login)</td>
                         <td>/users/login</td>
                         <td>
                             <pre>
 {
-"email": "MaorGabay@gabay.com",
-"password": "Maor31kd3Fg8"
-} </pre>
+    "email": "chayahenner@gabay.com",
+    "password": "chaya1234"
+    } </pre>
                         </td>
                         <td>User login, if the email and password are correct the server will respond with a token,<br>
                             <a class="text-decoration-none"
@@ -201,14 +201,14 @@ lastName: Gabay
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
-                        <td >GET</td>
+                    <tr>
+                        <td>GET</td>
                         <td><a href="https://api-chaya.onrender.com/toys">/toys</a></td>
                         <td class="text-center">none</td>
                         <td>Get a list of all the toys, will present 10 results per page.</td>
                     </tr>
-                    <tr >
-                        <td >GET</td>
+                    <tr>
+                        <td>GET</td>
                         <td><a href="https://api-chaya.onrender.com/toys/search?s=doll">/toys/search?s=doll</a></td>
                         <td class="text-center">none</td>
                         <td>search for a toy by searching follwing name or info after the "s=", it will present 10
@@ -217,20 +217,21 @@ lastName: Gabay
                     </tr>
                     <tr>
                         <td>GET</td>
-                        <td><a   href="https://api-chaya.onrender.com/toys/prices?min=50&max=200">/toys/prices?min=50&max=200</a>
+                        <td><a
+                                href="https://api-chaya.onrender.com/toys/prices?min=50&max=200">/toys/prices?min=50&max=200</a>
                         </td>
                         <td class="text-center">none</td>
                         <td>Get a list of the toys by price min & max , it will present 10 results per page.</td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td>GET</td>
                         <td><a href="https://api-chaya.onrender.com/toys/category/Beauty">/toys/category/:cat</a></td>
                         <td class="text-center">none</td>
                         <td>Get a list of all the toys in toys <strong>category</strong>, it will present 10 results per
                             page.</td>
                     </tr>
-                    <tr >
-                        <td >POST</td>
+                    <tr>
+                        <td>POST</td>
                         <td>/toys</td>
                         <td>
                             <pre>
@@ -266,13 +267,15 @@ lastName: Gabay
                                     }
    </pre>
                         </td>
-                        <td>Update a toy in the data base, only if the tiy is yours.<strong>You need a token for this query.</strong></td>
+                        <td>Update a toy in the data base, only if the toy is yours.<strong>You need a token for this
+                                query.</strong></td>
                     </tr>
                     <tr>
                         <td>DELETE</td>
                         <td>/toys/ID</td>
                         <td class="text-center">none</td>
-                        <td>Delete a toy from the data base, <strong>You need a token for this query.</strong></td>
+                        <td>Delete a toy from the data base, only if the toy is yours. <strong>You need a token for this
+                                query.</strong></td>
                     </tr>
                 </tbody>
             </table>

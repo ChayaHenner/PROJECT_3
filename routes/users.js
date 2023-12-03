@@ -5,9 +5,9 @@ const { UserModel, validUser, validLogin, createToken } = require("../models/use
 const bcrypt = require("bcrypt");
 
 
-router.get("/", async (req, res) => {
-  res.json({ msg: "Users work" })
-})
+// router.get("/", async (req, res) => {
+//   res.json({ msg: "Users work" })
+// })
 
 router.get("/myInfo", auth, async (req, res) => {
   try {
@@ -19,6 +19,7 @@ router.get("/myInfo", auth, async (req, res) => {
     res.status(500).json({ msg: "err", err })
   }
 })
+
 //!take away
 router.get("/list", async (req, res) => {
   try {
