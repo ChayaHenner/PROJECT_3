@@ -110,6 +110,7 @@ router.post("/", auth, async (req, res) => {
     // let user_id = req.tokenData._id
     let user = await UserModel.findOne({_id:req.tokenData._id})
     user.toys.push(toy._id)
+    await user.save();
     await toy.save();
     res.status(201).json(toy);
   }
