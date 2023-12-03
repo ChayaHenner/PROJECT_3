@@ -8,15 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <!-- <link rel="stylesheet" href="index.css"> -->
 
     <title>TOYS API</title>
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-light py-2 shadow">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg bg-light py-0 shadow">
+            <div class="container-fluid" style=" background:rgb(167, 163, 208);">
                 <a class="navbar-brand myScale" href="#">TOYS API</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -38,7 +37,7 @@
     </header>
 
     <!-- main start -->
-    <main class="container-fluid pb-4" style="background-color: blanchedalmond;">
+    <main class="container-fluid pb-4" style="background-color:rgb(205, 202, 231);">
 
         <!-- table 1 -->
         <div class="container">
@@ -144,7 +143,7 @@ lastName: Henner
         <!-- table 2 -->
         <div class="container">
             <div id="toy_id" class="text-center m-3">
-                <h2 class="display-4 text-center py-2">
+                <h2 class="display-4 text-center pb-2 pt-4">
                     Toys Routes
                 </h2>
             </div>
@@ -157,10 +156,7 @@ lastName: Henner
                 <p class="text-center text1">Some <b>"GET"</b> requests you can get information about the API,
                     By adding these <b>queries</b> you can see the edit</p>
                 <ul>
-                    <li><strong>Per-Page :</strong> you can select the amount of obj per one page.</li>
                     <li><strong>Page :</strong> you can select the num of pages you want.</li>
-                    <li><strong>Sort :</strong> you can select how to make your sort - by Price / ID / Name / Cat. </li>
-                    <li><strong>Reverse :</strong> you can choose the sort dirction.</li>
                 </ul>
             </div>
         </div>
@@ -168,12 +164,7 @@ lastName: Henner
         <div class="container table-responsive shadow py-2">
             <table class="table table-bordered table-striped mb-3">
                 <h4 class="mb-3 text-center bigDomain">
-                    <span class="text-info fw-bolder">D</span>
-                    <span class="text-dark">o</span>
-                    <span class="text-warning fw-bolder">m</span>
-                    <span class="text-dark">a</span>
-                    <span class="text-info fw-bolder">i</span>
-                    <span class="text-dark">n :</span>
+                    domain
                     <span class="text-info text fw-bold" id="Domain">https://api-chaya.onrender.com/</span>
                     <button class="btn mx-2 copyBtn" id="domainbtn2"><i class="bi bi-files"></i></button>
                 </h4>
@@ -233,17 +224,13 @@ lastName: Henner
    </pre>
                         </td>
                         <td>Add a new toy to the data base, <strong>You need a token for this query ,</strong><br>
-                            <a class="text-decoration-none"
-                                href="https://github.com/MaorgD/ToysProject/blob/main/api/validation/toyValidation.js">if
-                                you want to see the template of valid toy</a>
                         </td>
                     </tr>
                     <tr>
                         <td>PUT</td>
                         <td>/toys/ID </td>
                         <td>
-                            <pre>
-                                {
+                            <pre> {
                                     "name":"barbie Doll",
                                     "info":"a girls dream doll",
                                     "category":"Beauty",
@@ -277,18 +264,9 @@ lastName: Henner
                     <use xlink:href="#bootstrap"></use>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2022 , Maor Gabay Pro</span>
+            <span class="mb-3 mb-md-0 text-muted">© 2023 , Chaya Henner </span>
         </div>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex me-5">
-            <li class="ms-3"><a class="text-muted" href="https://www.whatsapp.com/"><i class="bi bi-whatsapp"></i>
-                </a></li>
-            <li class="ms-3"><a class="text-muted" href="https://www.linkedin.com/"><i class="bi bi-linkedin"></i>
-                </a></li>
-            <li class="ms-3"><a class="text-muted" href="https://github.com/MaorgD/ToysProject "><i
-                        class="bi bi-github"></i>
-                </a></li>
-        </ul>
     </footer>
     <!-- footer end -->
 

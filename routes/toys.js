@@ -33,7 +33,7 @@ router.get("/toysByUser/:id", async (req, res) => {
   try {
     console.log(id);
     let user = await UserModel.findOne({ _id: id }).populate('toys')
-    res.json(user);
+    res.json(user.toys);
     if (!user) {
       return res.status(404).json({ user,msg: "User not found" });
     }
@@ -44,6 +44,8 @@ router.get("/toysByUser/:id", async (req, res) => {
   }
 
 })
+
+
 
 router.get("/prices", async (req, res) => {
   let perPage = 10
@@ -68,8 +70,7 @@ router.get("/prices", async (req, res) => {
 router.get("/single/:id", async (req, res) => {
   let id = req.params.id
   try {
-    let data = await ToyModel
-      .find({ _id: id })
+    let data = await ToyModel.find({ _id: id })
     res.json(data);
   }
   catch (err) {
