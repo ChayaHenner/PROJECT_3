@@ -27,11 +27,12 @@ router.get("/", async (req, res) => {
 
 })
 
-router.get("/toysByUser", auth , async (req, res) => {
+router.get("/toysByUser/id", async (req, res) => {
   let perPage = 10// Math.min(req.query.perPage, 20) || 4;
   let page = req.query.page || 1;
+  let id = req.query.id
   try {
-    let toys = await UserModel.findOne({_id:req.tokenData._id}).populate('toys')
+    let toys = await UserModel.findOne({ _id: req.tokenData._id }).populate('toys')
     res.json(toys);
   }
   catch (err) {
@@ -65,7 +66,7 @@ router.get("/single/:id", async (req, res) => {
   let id = req.params.id
   try {
     let data = await ToyModel
-      .find({ _id:id })
+      .find({ _id: id })
     res.json(data);
   }
   catch (err) {
@@ -76,7 +77,7 @@ router.get("/single/:id", async (req, res) => {
 })
 router.get("/category/:cat", async (req, res) => {
   let cat = req.params.cat
-  cat = new RegExp(cat,"i")
+  cat = new RegExp(cat, "i")
 
   let perPage = 10
   let page = req.query.page || 1;
@@ -123,7 +124,7 @@ router.post("/", auth, async (req, res) => {
     let toy = new ToyModel(req.body);
     toy.user_id = req.tokenData._id
     // let user_id = req.tokenData._id
-    let user = await UserModel.findOne({_id:req.tokenData._id})
+    let user = await UserModel.findOne({ _id: req.tokenData._id })
     user.toys.push(toy._id)
     await user.save();
     await toy.save();
@@ -155,22 +156,22 @@ router.delete("/:delId", auth, async (req, res) => {
   }
 })
 
-router.put("/:editId",auth, async(req,res) => {
+router.put("/:editId", auth, async (req, res) => {
   let validBody = validateToy(req.body);
-  if(validBody.error){
+  if (validBody.error) {
     return res.status(400).json(validBody.error.details);
   }
-  try{
+  try {
     let editId = req.params.editId;
     let data;
-       data = await ToyModel.updateOne({_id:editId,user_id:req.tokenData._id},req.body)
-       if (data.modifiedCount == 0)
-       res.json({ msg: "not valid id or you are not allowed to edit. wasn't edited" })
-     else res.json(data);
+    data = await ToyModel.updateOne({ _id: editId, user_id: req.tokenData._id }, req.body)
+    if (data.modifiedCount == 0)
+      res.json({ msg: "not valid id or you are not allowed to edit. wasn't edited" })
+    else res.json(data);
   }
-  catch(err){
+  catch (err) {
     console.log(err);
-    res.status(500).json({msg:"server error",err})
+    res.status(500).json({ msg: "server error", err })
   }
 })
 
