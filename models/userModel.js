@@ -15,7 +15,7 @@ let userSchema = new mongoose.Schema({
     type: String,
     default: "user"
   },
-  toys:[]
+  toys: [{ type: mongoose.Schema.Types.ObjectId, ref: 'toys' }]
 })
 
 exports.UserModel = mongoose.model("users", userSchema);

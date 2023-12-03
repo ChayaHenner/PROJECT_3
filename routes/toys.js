@@ -3,6 +3,7 @@ const router = express.Router();
 const { auth, authAdmin } = require("../middlewares/auth");
 const { ToyModel, validateToy } = require("../models/toyModel")
 const bcrypt = require("bcrypt");
+const { UserModel } = require("../models/userModel");
 
 
 
@@ -106,6 +107,9 @@ router.post("/", auth, async (req, res) => {
   try {
     let toy = new ToyModel(req.body);
     toy.user_id = req.tokenData._id
+    // let user_id = req.tokenData._id
+    let user = await UserModel.findOne({_id:req.tokenData._id})
+    user.toys.push(toy._id)
     await toy.save();
     res.status(201).json(toy);
   }
