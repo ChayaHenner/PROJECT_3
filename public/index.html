@@ -38,7 +38,7 @@
     </header>
 
     <!-- main start -->
-    <main class="container-fluid pb-4">
+    <main class="container-fluid pb-4" style="background-color: blanchedalmond;">
 
         <!-- table 1 -->
         <div class="container">
@@ -69,13 +69,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
+                    <tr>
                         <td>GET</td>
                         <td><a href="/users/myInfo">/users/myInfo</a></td>
                         <td class="text-center">none</td>
                         <td>Get your own info - by token.</td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td>GET</td>
                         <td><a href="/users/usersList">/users/usersList</a></td>
                         <td class="text-center">none</td>
@@ -110,15 +110,14 @@ lastName: Henner
                         <td>User login, if the email and password are correct the server will respond with a token,<br>
                         </td>
                     </tr>
-                    <tr >
+                    <tr>
                         <td>DELETE</td>
                         <td>/users/{idDel}</td>
                         <td></td>
-                        <td>Delete a user from the data base. <strong> Admin token can delete every user , and user can
-                                delete only himself.</strong>
+                        <td>Delete a user from the data base. <strong>only admin token can delete every user.</strong>
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td >PUT</td>
                         <td>/users/{idEdit}</td>
                         <td>
@@ -137,7 +136,7 @@ lastName: Henner
                                 can
                                 edit only himself.</strong>
                         </td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -146,18 +145,7 @@ lastName: Henner
         <div class="container">
             <div id="toy_id" class="text-center m-3">
                 <h2 class="display-4 text-center py-2">
-                    <span class="text-warning fw-bolder">T</span>
-                    <span>o</span>
-                    <span class="text-info fw-bolder">y</span>
-                    <span>s</span>
-                    <span>-</span>
-                    <span> R</span>
-                    <span class="text-info fw-bolder">o</span>
-                    <span>u</span>
-                    <span class="text-warning fw-bolder">t</span>
-                    <span>e</span>
-                    <span class="text-info fw-bolder">s</span>
-
+                    Toys Routes
                 </h2>
             </div>
 
