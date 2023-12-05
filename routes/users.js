@@ -5,13 +5,13 @@ const { UserModel, validUser, validLogin, createToken } = require("../models/use
 const bcrypt = require("bcrypt");
 
 
-router.get("/myInfo", auth, async (req, res) => {
+router.get("/myInfo", auth, async (req, res) => {      
   try {
-    let userInfo = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 })
+    let user = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 })
     if (user.toys.length > 0) {
       await user.populate('toys');
     }
-    res.json(userInfo);
+    res.json(user);
   }
   catch (err) {
     console.log(err)
