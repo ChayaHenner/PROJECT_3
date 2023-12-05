@@ -5,13 +5,9 @@ const { UserModel, validUser, validLogin, createToken } = require("../models/use
 const bcrypt = require("bcrypt");
 
 
-// router.get("/", async (req, res) => {
-//   res.json({ msg: "Users work" })
-// })
-
 router.get("/myInfo", auth, async (req, res) => {
   try {
-    let userInfo = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 });
+    let userInfo = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 }).populate('toys');
     res.json(userInfo);
   }
   catch (err) {
@@ -43,16 +39,7 @@ router.get("/usersList", authAdmin, async (req, res) => {
   }
 })
 
-// router.get("/myInfo", auth, async (req, res) => {
-//   try {
-//     let userInfo = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 });
-//     res.json(userInfo);
-//   }
-//   catch (err) {
-//     console.log(err)
-//     res.status(500).json({ msg: "err", err })
-//   }
-// })
+
 
 router.post("/", async (req, res) => {
   let validBody = validUser(req.body);
