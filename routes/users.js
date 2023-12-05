@@ -8,9 +8,7 @@ const bcrypt = require("bcrypt");
 router.get("/myInfo", auth, async (req, res) => {      
   try {
     let user = await UserModel.findOne({ _id: req.tokenData._id }, { password: 0 })
-    // if (user.toys.length > 0) {
-    //   await user.populate('toys');
-    // }
+
     res.json(user);
   }
   catch (err) {
